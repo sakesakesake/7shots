@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <title>SAKE</title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="description" content="website about sake">
+            <link href="stylesheet.css" rel="stylesheet">
+            <script src="moderizr.custom.05819.js"></script>
+        </head>
+        <body>
+            <div class="wrapper">
+                 <header>
+                    <h1>Purchase</h1>
+                 </header>
+                 <nav>
+                    <ul>
+                        <li><a href="index.html">HOME</a></li>
+                        <li><a href="history.html">HISTORY</a></li>
+                        <li><a href="howtodrink.html">DRINK</a></li>
+                        <li><a href="contact.html">BUY</a></li>
+                    </ul>
+                 </nav>
+                 <main>
+                    <h4>Purchase</h4> 
+                    <form>
+                        <label for="AgeLimit">What is your age?</label>
+                        <input type="number" id="age" name="age">
+                        <input type="button" id="agebtn" value="SUBMIT">
+                    </form>
+                    <p id="demo"></p>
+                    <fieldset>
+                        <legend class="summary">Summary of debugging methods</legend>
+                        <p class="summary2">The debugging method I used here is "try" "catch" method. <br>
+                        The form I used in this webpage is to check if user is underage or over 21 because it is a webpage to purchase sake.<br>
+                        I simply used if state to put users into two group but the entry of age has more choices, like -2 and 0 and empty.<br>
+                        So the try and catch state can prevent those unexpected input.</p>
+                        </fieldset>
+                     <table class="big">
+                        <tr>
+                            <td><img class="sakeimg" src="sake2dassai.jpg" alt="dassai sake bottle>"></td>
+                            <td><img class="sakeimg" src="sake3honami.jpg" alt="honami sake bottle>"></td>
+                            <td><img class="sakeimg" src="sake4nanawarai.jpg" alt="nanawarai sake bottle"></td>
+                        </tr>
+                        <tr>
+                            <th>Dassai</th>
+                            <th>Honami</th>
+                            <th>Nanawarai(Seven Smiles)</th>
+                        </tr>
+                        <tr>
+                            <td>One of the most popular sake in Japan<br>
+                                <form><input type="checkbox" id="item1" value="30" />
+                                <label for="item1"> $30.00</label></form>
+                            </td>
+                            <td>My favorite one since it has the same name as me<br>
+                                <form><input type="checkbox" id="item2" value="25" />
+                                <label for="item2">$25.00</label></form>
+                            </td>
+                            <td>One of my favorite one<br>
+                                <form><input type="checkbox" id="item3" value="27" />
+                                <label for="item3">$27.00</label></form>
+                            </td>
+                        </tr>
+                     </table>
+                     <table class="small">
+                        <tr>
+                            <td rowspan="2"><img class="sakeimg" src="sake2dassai.jpg" alt="dassai sake bottle>"></td>
+                            <th>Dassai<br>
+                                <form><input type="checkbox" id="item1" value="30" />
+                                    <label for="item1"> $30.00</label></form></th>
+                        </tr>
+                        <tr>
+                            <td>One of the most popular sake in Japan</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2"><img class="sakeimg" src="sake3honami.jpg" alt="honami sake bottle>"></td>
+                            <th>Honami<br>
+                                <form><input type="checkbox" id="item2" value="25" />
+                                    <label for="item2">$27.00</label></form></th>
+                        </tr>
+                        <tr>
+                            <td>My favorite one since it has the same name as me</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2"><img class="sakeimg" src="sake4nanawarai.jpg" alt="nanawarai sake bottle"></td>
+                            <th>Nanawarai(Seven Smiles)<br>
+                                <form><input type="checkbox"id="item3" value="27"/>
+                                    <label for="item3">$27.00</label></form></th>
+                        </tr>
+                        <tr>
+                            <td>One of my favorite one</td>
+                        </tr>
+                     </table>
+                     <div class="button">
+                     <input type="submit" id="submit" value="Click to Purchase" />
+                     <span>!!Delivery charge : $15 will be included in total price</span>
+                     <p id=price>TOTAL PRICE :</p></main></div>
+                 </main>
+            </div>
+            <footer>
+                Copyright&copy;2020 HonamiSasahara
+            </footer>
+            <script>
+                
+                function ageLimit(){
+                    var ageLimit = document.getElementById("age").value;
+                    demo = document.getElementById("demo");
+                    demo.innerHTML = "";
+                    if (ageLimit>=21) {
+                        demo.innerHTML="We have some recoommendation below";
+                        document.getElementById("submit").value="CLICK TO PURCHASE";
+                    } else if(ageLimit>0 && ageLimit<21) {
+                        alert("I am afraid you are under age.  Alcohol is from 21.")
+                        document.getElementById("submit").value="DO NOT PURCHASE";
+                    }
+                    try {
+                        if(ageLimit=="")
+                            throw "Please enter your age.";
+                        if(ageLimit<=0)
+                            throw "Please enter your age.";
+                    }
+                    catch (err){
+                        demo.innerHTML = err;
+                    }
+                }
+                document.getElementById("agebtn").addEventListener("click", ageLimit, false);
+
+                /* Purchase system with checkbox function
+                delivery cost is $15
+                tax rate is 10%
+                textbox popup either "Thank you" or "not selected"
+                */
+                function calcTotal () {
+                var itemTotal = 0;
+                var item1 = document.getElementById("item1");
+                var item2 = document.getElementById("item2");
+                var item3 = document.getElementById("item3");
+                (item1.checked) ? (itemTotal +=30) : (itemTotal +=0);
+                (item2.checked) ? (itemTotal +=25) : (itemTotal +=0);
+                (item3.checked) ? (itemTotal +=27) : (itemTotal +=0);
+                var salesTaxRate = 0.1;
+                itemTotal *=100;
+                (item1.checked)||(item2.checked)||(item3.checked) ? (deliveryPrice=15)
+                : (deliveryPrice=0);
+                (item1.checked)||(item2.checked)||(item3.checked) ? (alert("Thank you for purchasing!"))
+                : (alert("Nothing has been selected yet"));
+                orderTotal = (itemTotal + (itemTotal * salesTaxRate))/100 + deliveryPrice;
+                
+                document.getElementById("price").innerHTML=
+                document.getElementById("price").innerHTML= "TOTAL PRICE including tax: $"+ orderTotal;
+                }
+                document.getElementById("submit").addEventListener("click", calcTotal, false);
+                
+            </script>
+        </body>
+    </html>
